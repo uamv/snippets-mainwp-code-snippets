@@ -29,7 +29,7 @@
 		$wptc['staging'] = maybe_unserialize( $wptc['staging'] );
 
 		echo '<span style="color: #F76B00;"><i class="dashicons dashicons-no"></i> WP Time Capsule is not active.</span><br />';
-		echo $result ? '<span style="color: #CD2E20;"><i class="dashicons dashicons-warning></i> An orphoned staging site exists at ' . $wptc['staging']['destination_url'] . '.</span><br />' : '<span style="color: #F76B00;"><i class="dashicons dashicons-no"></i> WP Time Capsule has no staged a site.</span><br />';
+		echo ! empty( $wptc['staging'] ) ? '<span style="color: #CD2E20;"><i class="dashicons dashicons-warning></i> An orphoned staging site exists at ' . $wptc['staging']['destination_url'] . '.</span><br />' : '<span style="color: #F76B00;"><i class="dashicons dashicons-no"></i> WP Time Capsule has no staged a site.</span><br />';
 
 	}
 
@@ -41,6 +41,11 @@
 
 		echo '<span style="color: #01A800;"><i class="dashicons dashicons-yes"></i> WP Merge is active.</span><br />';
 		echo ! empty( $wpmerge['recording'] ) ? '<span style="color: #01A800;"><i class="dashicons dashicons-admin-generic"></i> WP Merge is recording changes to ' . $wptc['staging']['destination_url'] . '.</span><br />' : '<span style="color: #CD2E20;"><i class="dashicons dashicons-warning"></i> WP Merge is NOT recording changes at this time.</span><br />';
+		
+		if ( $wptc['staging']['db_prefix'] ) {
+			$changes = $GLOBALS['wpdb']->get_var("SELECT COUNT(id) FROM `" . $wptc['staging']['db_prefix'] . "wpmerge_log_queries` WHERE `is_record_on` = '1' AND `type` = 'query'");
+			echo '<span style="color: #137EC2;"><i class="dashicons dashicons-vault"></i> ' . $changes . ' changes have been recorded.</span><br />';
+		}
 
 	} else {
 
