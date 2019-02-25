@@ -44,7 +44,7 @@
 		
 		if ( $wptc['staging']['db_prefix'] ) {
 			$changes = $GLOBALS['wpdb']->get_var("SELECT COUNT(id) FROM `" . $wptc['staging']['db_prefix'] . "wpmerge_log_queries` WHERE `is_record_on` = '1' AND `type` = 'query'");
-			echo '<span style="color: #137EC2;"><i class="dashicons dashicons-vault"></i> ' . $changes . ' changes have been recorded.</span><br />';
+			echo '<span style="color: #137EC2;"><i class="dashicons dashicons-share" style="transform: rotate(152deg);"></i> <strong>' . $changes . '</strong> changes have been recorded.</span><br />';
 		}
 
 	} else {
