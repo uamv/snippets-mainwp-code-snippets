@@ -2,7 +2,7 @@
 
 	/**
 	 * @title Check WPTC Staging & WP Merge Recording
-	 * @description For those running WPTC and WP Merge, this checks (1) if WP Time Capsule is active, (2) if WPTC has staged a site, (3) if WP Merge is active, (4) if WP Merge is recording changes, and (5) the dev site within which changes are being recorded.
+	 * @description For those running WPTC and WP Merge, this checks (1) if WP Time Capsule is active, (2) if WPTC has staged a site, (3) if WP Merge is active, (4) if WP Merge is recording changes, (5) the dev site within which changes are being recorded, and (6) the number of changes that have been recorded.
 	 * @type This Code Snippet only returns information from Child Site
 	 */
 
