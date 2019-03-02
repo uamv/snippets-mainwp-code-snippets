@@ -18,8 +18,10 @@
 		}
 		$gf['forms']['inactive'] = GFAPI::get_forms( false );
 		$gf['forms']['all'] = array_merge( $gf['forms']['active'], $gf['forms']['inactive'] );
-		$gf['forms']['trashed'] = GFAPI::get_forms( false, true );
-		$gf['forms']['count']['total'] = count( $gf['forms']['active'] ) + count( $gf['forms']['inactive'] ) + count( $gf['forms']['trashed'] );
+		$gf['forms']['trashed']['active'] = GFAPI::get_forms( true, true );
+		$gf['forms']['trashed']['inactive'] = GFAPI::get_forms( false, true );
+		$gf['forms']['count']['total'] = count( $gf['forms']['active'] ) + count( $gf['forms']['inactive'] ) + count( $gf['forms']['trashed']['active'] ) + count( $gf['forms']['trashed'] );
+		$gf['forms']['trashed'] = array_merge( $gf['forms']['trashed']['active'], $gf['forms']['trashed']['inactive'] );
 
 		echo '<style>
 			:root {
@@ -30,7 +32,7 @@
 				--inactive-primary: #BFA053;
 				--inactive-secondary: #d4c49d;
 				--inactive-tertiary: #ded7c6;
-				--inactive-accent: #365666;
+				--inactive-accent: #92a1a9;
 			}
 			.snippet-gf-form-count {
 			    font-size: 20px;
