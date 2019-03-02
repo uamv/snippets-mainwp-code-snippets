@@ -30,7 +30,7 @@
 				--inactive-primary: #BFA053;
 				--inactive-secondary: #d4c49d;
 				--inactive-tertiary: #ded7c6;
-				--inactive-accent: #365666;
+				--inactive-accent: #92a1a9;
 			}
 			.snippet-gf-form-count {
 			    font-size: 20px;
