@@ -20,7 +20,12 @@
 		$gf['forms']['all'] = array_merge( $gf['forms']['active'], $gf['forms']['inactive'] );
 		$gf['forms']['trashed']['active'] = GFAPI::get_forms( true, true );
 		$gf['forms']['trashed']['inactive'] = GFAPI::get_forms( false, true );
-		$gf['forms']['count']['total'] = count( $gf['forms']['active'] ) + count( $gf['forms']['inactive'] ) + count( $gf['forms']['trashed']['active'] ) + count( $gf['forms']['trashed'] );
+
+		$gf['forms']['count']['active'] = ! is_wp_error( $gf['forms']['active'] ) ? count( $gf['forms']['active'] ) : 0;
+		$gf['forms']['count']['inactive'] = ! is_wp_error( $gf['forms']['inactive'] ) ? count( $gf['forms']['inactive'] ) : 0;
+		$gf['forms']['count']['trashed']['active'] = ! is_wp_error( $gf['forms']['trashed']['active'] ) ? count( $gf['forms']['trashed']['active'] ) : 0;
+		$gf['forms']['count']['trashed']['inactive'] = ! is_wp_error( $gf['forms']['trashed']['inactive'] ) ? count( $gf['forms']['trashed']['inactive'] ) : 0;
+		$gf['forms']['count']['total'] = $gf['forms']['count']['active'] + $gf['forms']['count']['inactive'] + $gf['forms']['count']['trashed']['active'] + $gf['forms']['count']['trashed']['inactive'];
 		$gf['forms']['trashed'] = array_merge( $gf['forms']['trashed']['active'], $gf['forms']['trashed']['inactive'] );
 
 		echo '<style>
