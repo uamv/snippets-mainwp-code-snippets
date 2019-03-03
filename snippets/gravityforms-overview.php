@@ -134,7 +134,7 @@
 				margin-left: 1.75em;
 			}
 			.snippet-gf-form.inactive .snippet-gf-feeds img {
-				filter: invert(70);
+				filter: invert(1) hue-rotate(25deg) brightness(.9);
 			}
 			</style>';
 
@@ -187,7 +187,7 @@
 					echo '</div>';
 					echo '<span class="snippet-gf-entries">';
 						echo '<span>' . $form['entries']['count']['total'] . ' total entries</span>';
-						echo '(<span data-status="unread">' . $form['entries']['count']['unread'] . ' unread.</span>';
+						echo ' (<span data-status="unread">' . $form['entries']['count']['unread'] . ' unread.</span>';
 						echo ' <span data-status="read">' . $form['entries']['count']['read'] . ' read.</span>';
 						echo get_option( 'rg_gforms_enable_akismet' ) || $form['entries']['count']['spam'] > 0 ? ' <span data-status="spam">' . $form['entries']['count']['spam'] . ' spam.</span>' : '';
 						echo ' <span data-status="trashed">' .$form['entries']['count']['trashed'] . ' trashed. )</span>';
