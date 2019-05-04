@@ -44,8 +44,8 @@
 			rgba(225, 182, 83, .75) ' . ( $tests['percentage']['good'] ) . '%,
 			rgba(225, 182, 83, .75) ' . ( $tests['percentage']['good'] + $tests['percentage']['recommended'] * .3 ) . '%,
 			rgba(225, 182, 83, .75) ' . ( $tests['percentage']['good'] + $tests['percentage']['recommended'] - $tests['percentage']['recommended'] * .3 ) . '%,
-			rgba(205, 46, 32, .75) ' . ( $tests['percentage']['good'] + $tests['percentage']['recommended'] + $tests['percentage']['critical'] * .3 ) . '%,
-			rgba(205, 46, 32, .75) ' . ( 100 + $tests['percentage']['critical'] * .3 ) . '% );">';
+			rgba(226, 82, 69, .75) ' . ( $tests['percentage']['good'] + $tests['percentage']['recommended'] + $tests['percentage']['critical'] * .3 ) . '%,
+			rgba(226, 82, 69, .75) ' . ( 100 + $tests['percentage']['critical'] * .3 ) . '% );">';
 		$html .= '<span style="font-size: 18px; font-weight: bold;"><i class="dashicons dashicons-heart" style="font-size: 18px;"></i> ' . $tests['percentage']['passed'] . '% Site Health <em>(last checked ' . date( get_option('date_format'), $health['date'] ) . ')</em></span>';
 		$html .= '<div style="margin: .5em 1em 0 1.5em; font-size: 14px;">';
 		$html .= '<i class="dashicons dashicons-yes" style="font-size: 14px; line-height: 1.2;"></i> ' . $health['result']['good'] . ' passed tests.<br />';
