@@ -38,14 +38,57 @@
 
 	} else {
 
-		$html = '<div style="margin: -5px; padding: 10px;
-			background-image: linear-gradient( to right, rgba(1, 168, 0, .75) ' . ( - $tests['percentage']['good'] * .3 ) . '%,
-			rgba(1, 168, 0, .75) ' . ( $tests['percentage']['good'] - $tests['percentage']['good'] * .3 ) . '%,
-			rgba(225, 182, 83, .75) ' . ( $tests['percentage']['good'] ) . '%,
-			rgba(225, 182, 83, .75) ' . ( $tests['percentage']['good'] + $tests['percentage']['recommended'] * .3 ) . '%,
-			rgba(225, 182, 83, .75) ' . ( $tests['percentage']['good'] + $tests['percentage']['recommended'] - $tests['percentage']['recommended'] * .3 ) . '%,
-			rgba(226, 82, 69, .75) ' . ( $tests['percentage']['good'] + $tests['percentage']['recommended'] + $tests['percentage']['critical'] * .3 ) . '%,
-			rgba(226, 82, 69, .75) ' . ( 100 + $tests['percentage']['critical'] * .3 ) . '% );">';
+		$combination = 	1 * ( (int) (bool) $tests['percentage']['good'] ) + 2 * ( (int) (bool) $tests['percentage']['recommended'] ) + 4 * ( (int) (bool) $tests['percentage']['critical'] );
+
+		$html = '<div style="margin: -5px; padding: 10px; ';
+		switch ($combination) {
+			case 1: // good
+				$html .= 'background-color: rgba(1, 168, 0, .75);';
+				break;
+			case 2: // recommended
+				$html .= 'background-color: rgba(225, 182, 83, .75);';
+				break;
+			case 3: // good & recommended
+				$html .= 'background-image: linear-gradient( to right,
+					rgba(1, 168, 0, .75) 0%,
+					rgba(1, 168, 0, .75) ' . ( $tests['percentage']['good'] - min( $tests['percentage']['good'] * .3, $tests['percentage']['recommended'] * .3 ) ) . '%,
+					rgba(225, 182, 83, .75) ' . ( $tests['percentage']['good'] + min( $tests['percentage']['good'] * .3, $tests['percentage']['recommended'] * .3 ) ) . '%,
+					rgba(225, 182, 83, .75) 100% );';
+				break;
+			case 4: // critical
+				$html .= 'background-color: rgba(205, 46, 32, .75);';
+				break;
+			case 5: // good & critical
+				$html .= 'background-image: linear-gradient( to right,
+					rgba(1, 168, 0, .75) 0%,
+					rgba(1, 168, 0, .75) ' . ( $tests['percentage']['good'] - min( $tests['percentage']['good'] * .3, $tests['percentage']['critical'] * .3 ) ) . '%,
+					rgba(205, 46, 32, .75) ' . ( $tests['percentage']['good'] + min( $tests['percentage']['good'] * .3, $tests['percentage']['critical'] * .3 ) ) . '%,
+					rgba(205, 46, 32, .75) 100% );';
+				break;
+			case 6: // recommended & critical
+				$html .= 'background-image: linear-gradient( to right,
+					rgba(225, 182, 83, .75) 0%,
+					rgba(225, 182, 83, .75) ' . ( $tests['percentage']['recommended'] - min( $tests['percentage']['recommended'] * .3, $tests['percentage']['critical'] * .3 ) ) . '%,
+					rgba(205, 46, 32, .75) ' . ( $tests['percentage']['recommended'] + min( $tests['percentage']['recommended'] * .3, $tests['percentage']['critical'] * .3 ) ) . '%,
+					rgba(205, 46, 32, .75) 100% );';
+				break;
+			case 7: // good & recommended & critical
+				$html .= 'background-image: linear-gradient( to right,
+					rgba(1, 168, 0, .75) 0%,
+					rgba(1, 168, 0, .75) ' . ( $tests['percentage']['good'] - min( $tests['percentage']['good'] * .3, $tests['percentage']['recommended'] * .3 ) ) . '%,
+					rgba(225, 182, 83, .75) ' . ( $tests['percentage']['good'] + min( $tests['percentage']['good'] * .3, $tests['percentage']['recommended'] * .3 ) ) . '%,
+					rgba(225, 182, 83, .75) ' . ( $tests['percentage']['good'] + $tests['percentage']['recommended'] - min( $tests['percentage']['recommended'] * .3, $tests['percentage']['critical'] * .3 ) ) . '%,
+					rgba(205, 46, 32, .75) ' . ( $tests['percentage']['good'] + $tests['percentage']['recommended'] + min( $tests['percentage']['recommended'] * .3, $tests['percentage']['critical'] * .3 ) ) . '%,
+					rgba(205, 46, 32, .75) 100% );';
+				break;
+
+			default:
+				// code...
+				break;
+		}
+
+		$html .= '">';
+
 		$html .= '<span style="font-size: 18px; font-weight: bold;"><i class="dashicons dashicons-heart" style="font-size: 18px;"></i> ' . $tests['percentage']['passed'] . '% Site Health <em>(last checked ' . date( get_option('date_format'), $health['date'] ) . ')</em></span>';
 		$html .= '<div style="margin: .5em 1em 0 1.5em; font-size: 14px;">';
 		$html .= '<i class="dashicons dashicons-yes" style="font-size: 14px; line-height: 1.2;"></i> ' . $health['result']['good'] . ' passed tests.<br />';
