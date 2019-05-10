@@ -2,7 +2,7 @@
 
 	/**
 	 * @title Set Health Check Tests
-	 * @description Filter the tests used to determined WP health status of the site
+	 * @description Filter the tests used to determine WP health status of the site
 	 * @type This Code Snippet executes a function on the Child Site
 	 */
 	add_action( 'admin_init', function() {
